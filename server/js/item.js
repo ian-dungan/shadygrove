@@ -1,3 +1,5 @@
+var Entity = require('./entity'),
+    cls = require("./lib/class");
 
 module.exports = Item = Entity.extend({
     init: function(id, kind, x, y) {
@@ -7,12 +9,11 @@ module.exports = Item = Entity.extend({
     },
     
     handleDespawn: function(params) {
-        var self = this;
-        
         this.blinkTimeout = setTimeout(function() {
             params.blinkCallback();
-            self.despawnTimeout = setTimeout(params.despawnCallback, params.blinkingDuration);
-        }, params.beforeBlinkDelay);
+            
+            this.despawnTimeout = setTimeout(params.despawnCallback, params.blinkingDuration);
+        }.bind(this), params.beforeBlinkDelay);
     },
     
     destroy: function() {
@@ -30,6 +31,7 @@ module.exports = Item = Entity.extend({
     
     scheduleRespawn: function(delay) {
         var self = this;
+        
         setTimeout(function() {
             if(self.respawn_callback) {
                 self.respawn_callback();
