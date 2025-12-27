@@ -1,7 +1,6 @@
 
 var cls = require("./lib/class"),
     _ = require("underscore"),
-    Log = require('log'),
     Entity = require('./entity'),
     Character = require('./character'),
     Mob = require('./mob'),
@@ -16,6 +15,12 @@ var cls = require("./lib/class"),
     Properties = require("./properties"),
     Utils = require("./utils"),
     Types = require("../../shared/js/gametypes");
+var log = {
+    info: function(msg) { console.log('[INFO]', msg); },
+    error: function(msg) { console.error('[ERROR]', msg); },
+    debug: function(msg) { console.log('[DEBUG]', msg); }
+};
+
 
 // ======= GAME SERVER ========
 
